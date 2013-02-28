@@ -376,8 +376,14 @@ class Better_pagination_ext {
         $query_string = (isset($_SERVER['QUERY_STRING']) AND $_SERVER['QUERY_STRING'] != '') ? '?'. $_SERVER['QUERY_STRING'] : '';
         
         // Set our base
-        $this->base_url = isset($params['pagination_base']) ? $params['pagination_base'] : $this->EE->config->slash_item('site_url') . $this->EE->uri->uri_string . $query_string;
-
+        /*Condicional check to support Freebie, useful with structure and custom urls*/
+        if(isset($this->EE->config->_global_vars['freebie_stripped_uri'])){
+            $this->base_url = isset($params['pagination_base']) ? $params['pagination_base'] : $this->EE->config->slash_item('site_url') . $this->EE->config->_global_vars['freebie_stripped_uri'] . $query_string;
+        }
+		else{
+        	$this->base_url = isset($params['pagination_base']) ? $params['pagination_base'] : $this->EE->config->slash_item('site_url') . $this->EE->uri->uri_string . $query_string;
+		}
+        
         // Make sure the base has a ? in it before CI->Pagination gets ahold of it or it will puke.
         $this->base_url = ! strstr($this->base_url, '?') ? $this->base_url .'?' : $this->base_url;
         
