@@ -2,7 +2,7 @@
 
 Al credits to litzinger: https://github.com/litzinger/better-pagination.eeaddon
 
-Added basic suport for freebie
+Added basic suport for Freebie: http://devot-ee.com/add-ons/freebie, updates the base_url with the freebie striped segments.
 
 ------------------
 
